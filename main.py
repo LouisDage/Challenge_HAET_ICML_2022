@@ -179,7 +179,7 @@ while execution_time < 600:
 
     if epoch == 195:
       for param_group in optimizer.param_groups:
-        param_group['lr'] /= 8
+        param_group['lr'] /= 10
         
     execution_time = time.time() - t0
 
