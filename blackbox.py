@@ -169,17 +169,17 @@ total_epochs = 0
 epoch = 0
 best_test_acc = 0
 
-while execution_time < 450:
+while execution_time < 600:
     tr_acc = train(epoch)
     training_accuracies.append(tr_acc)
     te_acc = test(epoch)
     testing_accuracies.append(te_acc)
-    if epoch <= 180:
+    if epoch <= 215:
         scheduler.step()
 
-    if epoch == 210:
+    if epoch == 230:
       for param_group in optimizer.param_groups:
-        param_group['lr'] /= 15
+        param_group['lr'] /= 10
         
     execution_time = time.time() - t0
 
