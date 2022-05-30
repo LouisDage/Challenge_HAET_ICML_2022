@@ -7,7 +7,7 @@ import os
 import sys
 # from evaluator2 import *
 # from datahandler2 import DataHandler
-from neural_net_motifs import *
+import torch.nn as nn
 from thop import clever_format, profile
 from datahandler import *
 from autoaugment import CIFAR10Policy, Cutout
@@ -174,12 +174,12 @@ while execution_time < 600:
     training_accuracies.append(tr_acc)
     te_acc = test(epoch)
     testing_accuracies.append(te_acc)
-    if epoch <= 215:
+    if epoch <= 180:
         scheduler.step()
 
-    if epoch == 230:
+    if epoch == 195:
       for param_group in optimizer.param_groups:
-        param_group['lr'] /= 10
+        param_group['lr'] /= 8
         
     execution_time = time.time() - t0
 
@@ -203,10 +203,6 @@ while execution_time < 600:
 print('Best valid acc', max(testing_accuracies))
 print('Best train acc', max(training_accuracies))
 
-fichier = open("/home/dageloui/Documents/nomad/Block_NAS-main/Challenge_test/fichier_accuracy_2.txt", "a")
-fichier.write("\n"+"Accuracy train Archi 1 :"+str(max(training_accuracies)))
-fichier.write("\n"+"Accuracy valid Archi 1 :"+str(max(testing_accuracies)))
-fichier.close()
 
 # best_val_acc, best_epoch, nb_epochs = evaluator.train()
 cnt = 1
