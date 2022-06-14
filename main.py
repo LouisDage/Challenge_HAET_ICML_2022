@@ -8,14 +8,13 @@ import sys
 # from evaluator2 import *
 # from datahandler2 import DataHandler
 import torch.nn as nn
-from thop import clever_format, profile
 from datahandler import *
 from autoaugment import CIFAR10Policy, Cutout
 from convmixer import ConvMixer
+import time
 
 criterion = nn.CrossEntropyLoss()
 
-import time
 
 
 
@@ -174,12 +173,12 @@ while execution_time < 600:
     training_accuracies.append(tr_acc)
     te_acc = test(epoch)
     testing_accuracies.append(te_acc)
-    if epoch <= 180:
+    if epoch <= 215:
         scheduler.step()
 
-    if epoch == 195:
+    if epoch == 230:
       for param_group in optimizer.param_groups:
-        param_group['lr'] /= 10
+        param_group['lr'] /= 8
         
     execution_time = time.time() - t0
 
